@@ -13,8 +13,7 @@ export function drawArray(array, x) {
   let xStart = widthElement;
   let yStart = canvas.height;
   array.forEach((element, index) => {
-    let colour = '';
-    index == x? colour = 'green' : colour = 'blue';
+    let colour = 'blue';
     drawElement(xStart, yStart, widthElement, heightPerOne, element, colour);
     xStart += widthElement;
   })

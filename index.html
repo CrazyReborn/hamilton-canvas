@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hamilton</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <script type="module" src="./scripts/index.js" defer></script>
+  </head>
+  <body>
+	<nav>
+    <button id="start">Start Visualisation</button>
+    <label for="select-algo">Select algorithm</label>
+    <select id="select-algo">
+      <option value="">--Select algorithm--</option>
+      <option value="selection-sort">Selection Sort</option>
+      <option value="bubble-sort">Bubble Sort</option>
+      <option value="insertion-sort">Insertion Sort</option>
+      <option value="merge-sort">Merge Sort</option>
+    </select>
+    <label for="range"></label>
+    <input id="range" name="range" type="range">
+  </nav>
+  <section id="section" class="visualiser"></section>
+  </body>
+</html>

@@ -9,7 +9,7 @@ export async function bubbleSort(array) {
         array[x + 1] = array[x];
         array[x] = temp;
       }
-      await sleep(10);
+      await sleep(1);
       drawArray(array, x);
     }
   }

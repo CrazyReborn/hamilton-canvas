@@ -16,6 +16,8 @@ export async function selectionSort(array) {
     array[minIdex] = array[i];
     array[i] = ref;
     await sleep(66);
-    drawArray(array);
+    drawArray(array, i);
   }
+  await sleep(66);
+  drawArray(array, -1);
 }

@@ -44,7 +44,8 @@ async function merge(array, start, end) {
   iMain = start;
   while(iMain <= end) {
     array[iMain] = temp[iMain++];
+    await sleep(22);
+    drawArray(array);
   }
-  await sleep(100);
-  drawArray(array);
+ 
 }

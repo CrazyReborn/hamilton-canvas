@@ -3,6 +3,7 @@ import { bubbleSort } from "./algorithms/bubbleSort.js";
 import { selectionSort } from "./algorithms/selectionSort.js";
 import { insertionSort } from "./algorithms/insertionSort.js";
 import { mergeSort } from "./algorithms/mergeSort.js";
+import { quickSort } from './algorithms/quickSort.js';
 
 const range = document.querySelector('#range');
 const select = document.querySelector('select');
@@ -31,9 +32,10 @@ let array = [];
         insertionSort(array);
         break;
       case 'merge-sort':
-        console.log(array);
         mergeSort(array, 0, array.length - 1);
         break;
+      case 'quick-sort':
+        quickSort(array, 0, array.length - 1);
     }
   });
 })()

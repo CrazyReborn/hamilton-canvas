@@ -3,7 +3,8 @@ import { bubbleSort } from "./algorithms/bubbleSort.js";
 import { selectionSort } from "./algorithms/selectionSort.js";
 import { insertionSort } from "./algorithms/insertionSort.js";
 import { mergeSort } from "./algorithms/mergeSort.js";
-import { quickSort } from './algorithms/quickSort.js';
+import { quickSortEnd } from './algorithms/quickSort.js';
+import { drawArray } from "./canvas.js";
 
 const range = document.querySelector('#range');
 const select = document.querySelector('select');
@@ -34,8 +35,16 @@ let array = [];
       case 'merge-sort':
         mergeSort(array, 0, array.length - 1);
         break;
-      case 'quick-sort':
-        quickSort(array, 0, array.length - 1);
+      case 'quick-sort-end':
+        quickSortEnd(array, 0, array.length - 1);
     }
   });
+
+  const canvas = document.querySelector('.visualizer');
+  window.addEventListener('resize', () => {
+    canvas.height = window.innerHeight * 0.9;
+    canvas.width = window.innerWidth * 0.9;
+    drawArray(array, -1);
+  });
+
 })()

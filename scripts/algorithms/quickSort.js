@@ -1,7 +1,7 @@
 import { drawArray } from '../canvas.js';
 import { sleep } from "../sleep.js";
 
-export async function quickSort(array, start, end) {
+export async function quickSortEnd(array, start, end) {
   if (start < end) {
     let pivot = array[end];
 
@@ -23,11 +23,10 @@ export async function quickSort(array, start, end) {
   let temp = array[end];
   array[end] = array[j];
   array[j] = temp;
-  await sleep(11);
+  await sleep(1);
   drawArray(array);
-  let q = array.slice();
-  await quickSort(array, start, j - 1);
-  await quickSort(array, j + 1, end);
+  await quickSortEnd(array, start, j - 1);
+  await quickSortEnd(array, j + 1, end);
   await sleep(11);
   drawArray(array);
   }

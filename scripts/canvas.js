@@ -4,8 +4,6 @@ canvas.height = window.innerHeight * 0.9;
 canvas.width = window.innerWidth * 0.9;
 const c = canvas.getContext('2d');
 
-
-
 export function drawArray(array, x) {
   c.clearRect(0, 0, canvas.width, canvas.height)
   let widthElement = canvas.width * 0.9 / array.length;

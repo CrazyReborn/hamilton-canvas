@@ -11,9 +11,13 @@ export function drawArray(array, x) {
   let xStart = widthElement;
   let yStart = canvas.height;
   array.forEach((element, index) => {
-    let colour = 'blue';
+    let colour = '#5eb1bf';
+    if (index == x) {
+      colour = '#042a2b';
+    }
     drawElement(xStart, yStart, widthElement, heightPerOne, element, colour);
     xStart += widthElement;
+
   })
 }
 
@@ -26,5 +30,6 @@ function drawElement(xStart, yStart, widthElement, heightPerOne, element, colour
   c.lineTo(xStart, yStart);
   c.fillStyle = colour;
   c.fill();
+  c.strokeStyle = '#fef9ef';
   c.stroke();
 }

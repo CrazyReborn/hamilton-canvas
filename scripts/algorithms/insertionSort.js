@@ -9,8 +9,10 @@ export async function insertionSort(array) {
       array[x] = array[x - 1];
       array[x - 1] = temp;
       x--;
-      await sleep(11);
-      drawArray(array);
+      await sleep(5);
+      drawArray(array, x);
     }
   }
+  await sleep(5);
+  drawArray(array, -1);
 }

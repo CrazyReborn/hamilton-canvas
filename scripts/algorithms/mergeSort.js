@@ -8,7 +8,6 @@ export async function mergeSort(array, start, end) {
     await mergeSort(array, start, mid);
     await mergeSort(array, mid + 1, end);
     await merge(array, start, end);
-    //console.log(array);
   }
 }
 
@@ -45,7 +44,7 @@ async function merge(array, start, end) {
   while(iMain <= end) {
     array[iMain] = temp[iMain++];
     await sleep(22);
-    drawArray(array);
+    drawArray(array, iMain);
   }
  
 }

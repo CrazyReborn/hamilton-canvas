@@ -13,7 +13,7 @@ let algo = '';
 let array = [];
 
 (function main() {
-  range.addEventListener('change', (e) => {
+  range.addEventListener('input', (e) => {
     array = createArray(e.target.value);
   });
 
@@ -42,7 +42,7 @@ let array = [];
 
   const canvas = document.querySelector('.visualizer');
   window.addEventListener('resize', () => {
-    canvas.height = window.innerHeight * 0.9;
+    canvas.height = window.innerHeight * 0.89;
     canvas.width = window.innerWidth * 0.9;
     drawArray(array, -1);
   });

@@ -1,6 +1,6 @@
 const canvas = document.querySelector('.visualizer');
 
-canvas.height = window.innerHeight * 0.9;
+canvas.height = window.innerHeight * 0.89;
 canvas.width = window.innerWidth * 0.9;
 const c = canvas.getContext('2d');
 
@@ -8,7 +8,7 @@ export function drawArray(array, x) {
   c.clearRect(0, 0, canvas.width, canvas.height)
   let widthElement = canvas.width * 0.9 / array.length;
   let heightPerOne = canvas.height * 0.9 / array.length;
-  let xStart = widthElement;
+  let xStart = (canvas.width - widthElement*array.length) / 2;
   let yStart = canvas.height;
   array.forEach((element, index) => {
     let colour = '#5eb1bf';

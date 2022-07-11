@@ -16,19 +16,18 @@ export async function quickSortEnd(array, start, end) {
       array[j] = temp;
     }
     await sleep(11);
-    drawArray(array);
+    drawArray(array, array[end]);
     i++
   }
   j++;
   let temp = array[end];
   array[end] = array[j];
   array[j] = temp;
-  await sleep(1);
-  drawArray(array);
+  await sleep(11);
+  drawArray(array, array[j]);
   await quickSortEnd(array, start, j - 1);
   await quickSortEnd(array, j + 1, end);
-  await sleep(11);
-  drawArray(array);
   }
-  
+  await sleep(11);
+  drawArray(array, -1)
 }

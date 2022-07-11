@@ -31,7 +31,8 @@ let array = [];
         insertionSort(array);
         break;
       case 'merge-sort':
-        console.log(mergeSort(array));
+        console.log(array);
+        mergeSort(array, 0, array.length - 1);
         break;
     }
   });

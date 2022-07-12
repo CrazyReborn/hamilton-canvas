@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hamilton</title>
-    <link rel="stylesheet" href="./stylesheets/style.css">
-    <script type="module" src="./scripts/indexPath.js" defer></script>
+    <title>Hamilton. Sorting Algorithms</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <script type="module" src="../scripts/indexSort.js" defer></script>
   </head>
   <body>
 	<nav>
@@ -21,9 +21,11 @@
       <option value="quick-sort-end">Quick Sort(End Pivot)</option>
     </select>
   </label>
-  <button class="clear">Clear The Grid</button>
+    <label for="range">
+    <input id="range" name="range" type="range">
+  </label>
   <button id="start">Start Visualisation</button>
   </nav>
-  <section class="visualizer"></section>
+  <canvas class="visualizer"></canvas>
   </body>
 </html>

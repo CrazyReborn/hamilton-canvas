@@ -13,4 +13,6 @@ export async function bubbleSort(array) {
       drawArray(array, x);
     }
   }
+  await sleep(1);
+  drawArray(array, -1);
 }

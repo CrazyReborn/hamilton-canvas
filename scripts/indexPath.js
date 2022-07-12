@@ -1,3 +1,4 @@
+import { createAdjacencyList } from "./algorithms/createAdjacencyList.js";
 const section = document.querySelector('.visualizer');
 
 (function main() {
@@ -10,9 +11,14 @@ function createGrid() {
       newDiv.setAttribute('row', row);
       newDiv.setAttribute('column', column);
       newDiv.classList.add('node');
+      if (row == 3 && column == 2) newDiv.classList.add('start');
+      if (row == 10 && column == 22) newDiv.classList.add('finish');
       section.appendChild(newDiv);
     }
   }
 }
 
 createGrid();
+
+let graph = createAdjacencyList(document.querySelectorAll('.node'));
+console.log(graph);

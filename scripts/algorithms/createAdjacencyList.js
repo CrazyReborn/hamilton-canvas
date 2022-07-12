@@ -13,34 +13,42 @@ export function createAdjacencyList(nodeList) {
       if (current == null) return graph;
       //find the adjacent ones
       const adjLeft = document.querySelector(`.node[row="${row + 1}"][column="${column}"]`);
-      const adjLeftBottom = document.querySelector(`.node[row="${row + 1}"][column="${column + 1}"]`);
       const adjBottom = document.querySelector(`.node[row="${row}"][column="${column + 1}"]`);
+      const adjRight = document.querySelector(`.node[row="${row - 1}"][column="${column}"]`);
+      const adjUp = document.querySelector(`.node[row="${row}"][column="${column - 1}"]`);
 
-
-      if (adjLeft != null && !graph.hasOwnProperty(`${row + 1} ${column}`)) {
-        if (typeof graph[`${row + 1} ${column}`] != 'undefined' && !graph[`${row + 1} ${column}`].includes(`${row} ${column}`)) {
+      if (adjUp != null && !graph.hasOwnProperty(`${row} ${column - 1}`)) {
+        if (typeof graph[`${row} ${column - 1}`] != 'undefined' && graph[`${row} ${column - 1}`].includes(`${row} ${column}`)) {
           //do nothing
         } else {
-          edges.push(`${row + 1} ${column}`);
+          edges.push(`${row} ${column - 1}`);
         }
-        
       }
 
-      if (adjLeftBottom != null && !graph.hasOwnProperty(`${row + 1} ${column + 1}`)) {
-        if (typeof graph[`${row + 1} ${column + 1}`] != 'undefined' && !graph[`${row + 1} ${column + 1}`].includes(`${row} ${column}`)) {
+      if (adjRight != null && !graph.hasOwnProperty(`${row - 1} ${column}`)) {
+        if (typeof graph[`${row - 1} ${column}`] != 'undefined' && graph[`${row - 1} ${column}`].includes(`${row} ${column}`)) {
           //do nothing
         } else {
-          edges.push(`${row + 1} ${column + 1}`);
+          edges.push(`${row - 1} ${column}`);
         }
       }
 
       if (adjBottom != null && !graph.hasOwnProperty(`${row} ${column + 1}`)) {
-        if (typeof graph[`${row} ${column + 1}`] != 'undefined' && !graph[`${row} ${column + 1}`].includes(`${row} ${column}`)) {
+        if (typeof graph[`${row} ${column + 1}`] != 'undefined' && graph[`${row} ${column + 1}`].includes(`${row} ${column}`)) {
           //do nothing
         } else {
           edges.push(`${row} ${column + 1}`);
         }
       }
+
+      if (adjLeft != null && !graph.hasOwnProperty(`${row + 1} ${column}`)) {
+        if (typeof graph[`${row + 1} ${column}`] != 'undefined' && graph[`${row + 1} ${column}`].includes(`${row} ${column}`)) {
+          //do nothing
+        } else {
+          edges.push(`${row + 1} ${column}`);
+        }
+      }
+
       graph[currentCoord] = edges;
     }
     row++;

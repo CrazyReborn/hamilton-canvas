@@ -68,5 +68,5 @@ section.visualizer {
 }
 
 .node.visited {
-  background-color: black;
+  background-color: rgb(189, 189, 189);
 }

@@ -1,4 +1,5 @@
 import { createAdjacencyList } from "./algorithms/createAdjacencyList.js";
+import { deapthFirstSearch } from "./algorithms/deapthFirstSearch.js";
 const section = document.querySelector('.visualizer');
 
 (function main() {
@@ -21,4 +22,4 @@ function createGrid() {
 createGrid();
 
 let graph = createAdjacencyList(document.querySelectorAll('.node'));
-console.log(graph);
+deapthFirstSearch(graph, '3 2');

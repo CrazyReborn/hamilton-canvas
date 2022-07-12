@@ -67,6 +67,10 @@ section.visualizer {
   background-color: red;
 }
 
+.node.blocked {
+  background-color: black;
+}
+
 .node.visited {
   background-color: rgb(189, 189, 189);
 }

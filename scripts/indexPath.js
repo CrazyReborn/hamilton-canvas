@@ -3,6 +3,7 @@ import { deapthFirstSearch } from "./algorithms/deapthFirstSearch.js";
 const section = document.querySelector('.visualizer');
 
 (function main() {
+
 })
 
 function createGrid() {
@@ -17,9 +18,19 @@ function createGrid() {
       section.appendChild(newDiv);
     }
   }
+  const divs = document.querySelectorAll('.node');
+  divs.forEach((node) => {
+    node.addEventListener('click', (e) => {
+      e.target.classList.add('blocked');
+    })
+  })
 }
 
 createGrid();
 
 let graph = createAdjacencyList(document.querySelectorAll('.node'));
-deapthFirstSearch(graph, '3 2');
+console.log(graph);
+const start = document.querySelector('#start');
+start.addEventListener('click', () => {
+  deapthFirstSearch(graph, '3 2');
+})

@@ -1,6 +1,6 @@
 import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
 import { createAdjacencyList } from "./algorithms/createAdjacencyList.js";
-import { depthFirstSearch } from "./algorithms/depthFirstSearch.js";
+import { depthFirstSearch, showPathDFS } from "./algorithms/depthFirstSearch.js";
 
 const section = document.querySelector('.visualizer');
 const select = document.querySelector('select');
@@ -59,11 +59,12 @@ function getCoords(node) {
     console.log(algo);
   });
 
-  startBtn.addEventListener('click', () => {
+  startBtn.addEventListener('click', async () => {
     const startCoords = getCoords(startNode);
     switch(algo) {
       case 'depth-first':
-        depthFirstSearch(graph, startCoords);
+        const found = await depthFirstSearch(graph, startCoords);
+        if (found) showPathDFS(graph, startCoords);
         break;
       case 'breadth-first':
         breadthFirstSearch(graph, startCoords);

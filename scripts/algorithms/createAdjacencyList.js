@@ -38,7 +38,7 @@ export function createAdjacencyList(nodeList) {
           edges.push(`${row + 1} ${column}`);
       }
 
-      if (Boolean (adjLeft) && !graph.hasOwnProperty(`${row} ${column - 1}`)) {
+      if (Boolean (adjLeft) /* && !graph.hasOwnProperty(`${row} ${column - 1}`) */) {
         // if (typeof graph[`${row} ${column - 1}`] != 'undefined' && graph[`${row} ${column - 1}`].includes(`${row} ${column}`)) {
         //   //do nothing
         // } else {

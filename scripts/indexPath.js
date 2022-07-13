@@ -34,8 +34,10 @@ let graph = createAdjacencyList(document.querySelectorAll('.node'));
 
 function clearGrid() {
   for (let node of section.childNodes) {
-    if (node.classList.contains('visited')) {
+    if (node.classList.contains('visited')
+        || node.classList.contains('blocked')) {
       node.classList.remove('visited');
+      node.classList.remove('blocked');
     }
   }
 }

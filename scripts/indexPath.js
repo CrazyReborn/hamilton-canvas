@@ -1,10 +1,12 @@
+import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
 import { createAdjacencyList } from "./algorithms/createAdjacencyList.js";
-import { deapthFirstSearch } from "./algorithms/deapthFirstSearch.js";
+import { depthFirstSearch } from "./algorithms/depthFirstSearch.js";
+
 const section = document.querySelector('.visualizer');
+const select = document.querySelector('select');
+const startBtn = document.querySelector('button.start');
 
-(function main() {
-
-})
+let algo = '';
 
 function createGrid() {
   for (let row = 0; row < 20; row++) {
@@ -29,8 +31,45 @@ function createGrid() {
 createGrid();
 
 let graph = createAdjacencyList(document.querySelectorAll('.node'));
-console.log(graph);
-const start = document.querySelector('#start');
-start.addEventListener('click', () => {
-  deapthFirstSearch(graph, '3 2');
-})
+
+function clearGrid() {
+  for (let node of section.childNodes) {
+    if (node.classList.contains('visited')) {
+      node.classList.remove('visited');
+    }
+  }
+}
+
+function getCoords(node) {
+  const row = parseInt(node.getAttribute('row'));
+  const column = parseInt(node.getAttribute('column'));
+  const coords = `${row} ${column}`;
+  console.log(coords);
+  return `${row} ${column}`;
+}
+
+(function main() {
+  const clearBtn = document.querySelector('button.clear');
+  const startNode = document.querySelector('.node.start');
+
+  select.addEventListener('change', (e) => {
+    algo = e.target.value;
+    console.log(algo);
+  });
+
+  startBtn.addEventListener('click', () => {
+    const startCoords = getCoords(startNode);
+    switch(algo) {
+      case 'depth-first':
+        depthFirstSearch(graph, startCoords);
+        break;
+      case 'breadth-first':
+        breadthFirstSearch(graph, startCoords);
+        break;
+    }
+  })
+
+  clearBtn.addEventListener('click', () =>{
+    clearGrid();
+  })
+})()

@@ -1,6 +1,7 @@
 import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
-import { createAdjacencyList } from "./algorithms/createAdjacencyList.js";
+import { createAdjacencyList } from "./createAdjacencyList.js";
 import { depthFirstSearch, showPathDFS } from "./algorithms/depthFirstSearch.js";
+import { Dijkstras } from "./algorithms/Dijkstras.js";
 
 const section = document.querySelector('.visualizer');
 const select = document.querySelector('select');
@@ -14,9 +15,13 @@ function createGrid() {
       const newDiv = document.createElement('div');
       newDiv.setAttribute('row', row);
       newDiv.setAttribute('column', column);
+      
       newDiv.classList.add('node');
       if (row == 3 && column == 2) newDiv.classList.add('start');
       if (row == 10 && column == 22) newDiv.classList.add('finish');
+      newDiv.classList.contains('start') ?
+      newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1)
+      
       section.appendChild(newDiv);
     }
   }
@@ -64,11 +69,13 @@ function getCoords(node) {
     switch(algo) {
       case 'depth-first':
         const found = await depthFirstSearch(graph, startCoords);
-        if (found) showPathDFS(graph, startCoords);
+        found? showPathDFS(graph, startCoords) : console.log('no path exists');
         break;
       case 'breadth-first':
         breadthFirstSearch(graph, startCoords);
         break;
+      case 'dijkstra':
+        Dijkstras(graph, startCoords, startCoords);
     }
   })
 

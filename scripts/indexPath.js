@@ -43,6 +43,7 @@ function clearGrid() {
         || node.classList.contains('blocked')) {
       node.classList.remove('visited');
       node.classList.remove('blocked');
+      node.classList.remove('path');
     }
   }
 }

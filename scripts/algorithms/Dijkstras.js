@@ -10,7 +10,7 @@ export async function Dijkstras(graph, start, parent) {
   table[start] = { d: 0, parent: parentNode };
 
   while(queue.length > 0) {
-    queue.sort((a, b) => a[1] - b[1]);
+    queue.sort((a, b) => a[1] - b[1]);      //console.log(table[current]);
     const shifted = queue.shift();
     const dist = shifted[1];
     const current = shifted[0];
@@ -32,10 +32,10 @@ export async function Dijkstras(graph, start, parent) {
       break;
     }
 
-    await sleep(2);
+    await sleep(11);
 
 
-    node.classList.add('visited');
+    node.classList.contains('start')? '' : node.classList.add('visited');
 
     if (current != parentNode) {
       const prevDistance = table[current].d;
@@ -59,7 +59,7 @@ function getWeight(node) {
   return parseInt(node.getAttribute('weight'));
 }
 
-function createPath(finishNode, startNode, table) {
+async function createPath(finishNode, startNode, table) {
   const queue = [ finishNode ];
   const path = [];
   while(queue.length > 0) {
@@ -73,6 +73,7 @@ function createPath(finishNode, startNode, table) {
   for (const coord of path) {
     const row = coord.split(' ')[0];
     const column = coord.split(' ')[1];
+    await sleep(33);
     const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
     node.classList.add('path');
   }

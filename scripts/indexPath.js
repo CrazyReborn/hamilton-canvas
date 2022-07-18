@@ -105,14 +105,29 @@ function getCoords(node) {
   return `${row} ${column}`;
 }
 
-function addHeuristic(nodeList, finishNode) {
+function addHeuristic(nodeList, startNode, finishNode) {
   const finishNodeRow = parseInt(finishNode.getAttribute('row'));
   const finishNodeColumn = parseInt(finishNode.getAttribute('column'));
+  const startNodeRow = parseInt(startNode.getAttribute('row'));
+  const startNodeColumn = parseInt(startNode.getAttribute('column'));
   nodeList.forEach((node) => {
     const thisNodeRow = parseInt(node.getAttribute('row'));
     const thisNodeColumn = parseInt(node.getAttribute('column'));
-
-    const heuristic = finishNodeRow - thisNodeRow + finishNodeColumn - thisNodeColumn;
+    let heuristic;
+    if (finishNodeRow > thisNodeRow) {
+      if (finishNodeColumn > thisNodeColumn) {
+        heuristic = finishNodeRow - thisNodeRow + finishNodeColumn - thisNodeColumn;
+      } else {
+        heuristic = finishNodeRow - thisNodeRow + thisNodeColumn - finishNodeColumn;
+      }
+    } else {
+      if (finishNodeColumn > thisNodeColumn) {
+      heuristic =  thisNodeRow - finishNodeRow + finishNodeColumn - thisNodeColumn;
+      } else {
+        heuristic =  thisNodeRow - finishNodeRow + thisNodeColumn - finishNodeColumn;
+      }
+    }
+    
     node.setAttribute('heuristic', heuristic);
   });
 }
@@ -126,7 +141,7 @@ function addHeuristic(nodeList, finishNode) {
 
 
   select.addEventListener('change', (e) => {
-    addHeuristic(nodeList, finishNode);
+    addHeuristic(nodeList, startNode, finishNode);
     algo = e.target.value;
   });
 
@@ -143,6 +158,7 @@ function addHeuristic(nodeList, finishNode) {
         Dijkstras(graph, startCoords, startCoords);
         break;
       case 'a-star':
+        addHeuristic(nodeList, startNode, finishNode);
         AStar(graph, startCoords, startCoords);
     }
   })

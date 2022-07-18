@@ -1,7 +1,7 @@
 # hamilton-canvas
-###An algorithm visualizer written with vanilla JavaScript. Canvas API is used to visualize sorting algorithms. Pathfing is performed on a nodeList of divs.
+### An algorithm visualizer written with vanilla JavaScript. Canvas API is used to visualize sorting algorithms. Pathfing is performed on a nodeList of divs.
 
-##Sorting algorithms
+## Sorting algorithms
 
 **Selection sort** finds the smallest element in the unsorted subarray and moves it to the beginning of that subarray.
 **Bubble sort** takes two adjacent elements of the array and swaps them if they are not in the ascending order.

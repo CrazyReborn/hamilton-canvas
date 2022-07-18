@@ -1,4 +1,6 @@
-export function createGrid(section) {
+let dragged;
+
+export function createGrid(section, startNode, finishNode) {
   for (let row = 0; row < 30; row++) {
     for (let column = 0; column < 50; column++) {
       const newDiv = document.createElement('div');
@@ -21,12 +23,14 @@ export function createGrid(section) {
       newDiv.addEventListener('drop', (e) => {
         if (dragged.classList.contains('start')) {
           dragged.classList.remove('start');
+          dragged.setAttribute('draggable', false);
           e.target.classList.add('start');
           startNode = e.target;
         }
 
         if (dragged.classList.contains('finish')) {
           dragged.classList.remove('finish');
+          dragged.setAttribute('draggable', false);
           e.target.classList.add('finish');
           finishNode = e.target;
         }
@@ -94,6 +98,14 @@ export function addHeuristic(nodeList, finishNode) {
 export function getCoords(node) {
   const row = parseInt(node.getAttribute('row'));
   const column = parseInt(node.getAttribute('column'));
-  const coords = `${row} ${column}`;
   return `${row} ${column}`;
+}
+
+
+export function addDradSToMainNodes(startNode, finishNode) {
+  startNode = document.querySelector('.node.start');
+  finishNode = document.querySelector('.node.finish');
+
+  startNode.setAttribute('draggable', true);
+  finishNode.setAttribute('draggable', true);
 }

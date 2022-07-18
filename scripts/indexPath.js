@@ -2,7 +2,7 @@ import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
 import { createAdjacencyList } from "./createAdjacencyList.js";
 import { depthFirstSearch } from "./algorithms/depthFirstSearch.js";
 import { Dijkstras } from "./algorithms/Dijkstras.js";
-import { getCoords, addHeuristic, createGrid } from './gridFunctions.js'
+import { addDradSToMainNodes, getCoords, addHeuristic, createGrid } from './gridFunctions.js'
 import { AStar } from "./algorithms/AStar.js";
 
 const section = document.querySelector('.visualizer');
@@ -19,26 +19,19 @@ function addStarAndEndNodes() {
   const finish = document.querySelector(`.node[row="25"][column="45"]`).classList.add('finish');
 }
 
-function addDradSToMainNodes() {
-  let startNode = document.querySelector('.node.start');
-  let finishNode = document.querySelector('.node.finish');
 
-  startNode.setAttribute('draggable', true);
-  finishNode.setAttribute('draggable', true);
-}
 
-createGrid(section);
+createGrid(section, startNode, finishNode);
 addStarAndEndNodes();
-addDradSToMainNodes();
+addDradSToMainNodes(startNode, finishNode);
 
 let graph = createAdjacencyList(document.querySelectorAll('.node'));
+startNode = document.querySelector('.node.start');
+finishNode = document.querySelector('.node.finish');
 
 (function main() {
   const clearBtn = document.querySelector('button.clear');
   const nodeList = document.querySelectorAll('.node');
-
-  startNode = document.querySelector('.node.start');
-  finishNode = document.querySelector('.node.finish');
 
   select.addEventListener('change', (e) => {
     addHeuristic(nodeList, finishNode);
@@ -46,7 +39,9 @@ let graph = createAdjacencyList(document.querySelectorAll('.node'));
   });
 
   startBtn.addEventListener('click', () => {
-    const startCoords = getCoords(startNode);
+    startNode = document.querySelector('.node.start');
+    finishNode = document.querySelector('.node.finish');
+    let startCoords = getCoords(startNode);
     switch (algo) {
       case 'depth-first':
         depthFirstSearch(graph, startCoords);

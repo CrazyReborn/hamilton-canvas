@@ -8,16 +8,24 @@ export async function depthFirstSearch(graph, start) {
     const current = stack.pop();
     const row = current.split(' ')[0];
     const column = current.split(' ')[1];
-    if (document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('visited') ||
-    document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('blocked')) continue;
-    if (document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('finish')) {
+
+    const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
+
+    if (node.classList.contains('visited') || node.classList.contains('blocked')) continue;
+
+    if (node.classList.contains('finish')) {
       path.push(current);
       showPathDFS(path);
       return true;
     }
+
     await sleep(22);
-    document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.add('visited');
-    path.push(current);
+    if (!node.classList.contains('start')) {
+      node.classList.add('visited');
+      path.push(current);
+    }
+    
+
     for (let neighbor of graph[current]) {
       stack.push(neighbor);
       path.push(current);
@@ -34,13 +42,14 @@ const stack = path;
     const current = stack.pop();
     const row = current.split(' ')[0];
     const column = current.split(' ')[1];
-    if (document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('start')) return true;
-    if (document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('path')
-    || document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('blocked')) continue;
 
-    if(document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('visited')
-        && !document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('path')) {
-      document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.add('path');
+    const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
+
+    if (node.classList.contains('start')) return true;
+    if (node.classList.contains('path') || node.classList.contains('blocked')) continue;
+
+    if(node.classList.contains('visited') && !node.classList.contains('path')) {
+      node.classList.add('path');
       await sleep(11);
     }
   }  

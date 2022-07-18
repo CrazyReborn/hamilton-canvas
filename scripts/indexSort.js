@@ -8,11 +8,12 @@ import { drawArray } from "./canvas.js";
 
 const range = document.querySelector('#range');
 const select = document.querySelector('select');
-const startBtn = document.querySelector('#start');
+const startBtn = document.querySelector('start');
 let algo = '';
 let array = [];
 
 (function main() {
+  createArray(50);
   range.addEventListener('input', (e) => {
     array = createArray(e.target.value);
   });

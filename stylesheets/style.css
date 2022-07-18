@@ -41,8 +41,17 @@ input[type='range']::-webkit-slider-thumb {
   background: #187795;
 }
 
-#start {
+button {
   padding: 0.25rem 0.75rem;
+}
+
+nav > a {
+  color: white;
+  font-size: 1.5rem;
+}
+
+nav > a:link {
+  text-decoration: none;
 }
 
 section.visualizer {

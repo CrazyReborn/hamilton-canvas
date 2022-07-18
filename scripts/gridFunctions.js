@@ -63,3 +63,37 @@ export function addWall(e) {
   }
   e.target.classList.add('blocked');
 }
+
+export function addHeuristic(nodeList, finishNode) {
+  const finishNodeRow = parseInt(finishNode.getAttribute('row'));
+  const finishNodeColumn = parseInt(finishNode.getAttribute('column'));
+
+
+  nodeList.forEach((node) => {
+    const thisNodeRow = parseInt(node.getAttribute('row'));
+    const thisNodeColumn = parseInt(node.getAttribute('column'));
+    let heuristic;
+    if (finishNodeRow > thisNodeRow) {
+      if (finishNodeColumn > thisNodeColumn) {
+        heuristic = finishNodeRow - thisNodeRow + finishNodeColumn - thisNodeColumn;
+      } else {
+        heuristic = finishNodeRow - thisNodeRow + thisNodeColumn - finishNodeColumn;
+      }
+    } else {
+      if (finishNodeColumn > thisNodeColumn) {
+        heuristic = thisNodeRow - finishNodeRow + finishNodeColumn - thisNodeColumn;
+      } else {
+        heuristic = thisNodeRow - finishNodeRow + thisNodeColumn - finishNodeColumn;
+      }
+    }
+
+    node.setAttribute('heuristic', heuristic);
+  });
+}
+
+export function getCoords(node) {
+  const row = parseInt(node.getAttribute('row'));
+  const column = parseInt(node.getAttribute('column'));
+  const coords = `${row} ${column}`;
+  return `${row} ${column}`;
+}

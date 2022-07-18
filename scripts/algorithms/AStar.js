@@ -5,7 +5,7 @@ export async function AStar(graph, start, parent) {
   const startNode = document.querySelector(`.node[row="${start.split(' ')[0]}"][column="${start.split(' ')[1]}"]`);
   const startHeuristic = getHeuristic(startNode);
   const table = {};
-  for (const [node, edges] of Object.entries(graph)) {
+  for (const [node] of Object.entries(graph)) {
     table[node] = {d: Infinity, parent: null};
   };
   const queue = [ [ start, startHeuristic, 0, parentNode] ];
@@ -24,6 +24,7 @@ export async function AStar(graph, start, parent) {
     const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
 
     if (node.classList.contains('visited') || node.classList.contains('blocked')) continue;
+    
     if (node.classList.contains('finish')) {
       const prevDistance = table[current].d;
       if (dist < prevDistance) {

@@ -23,7 +23,7 @@ function createGrid() {
       newDiv.setAttribute('column', column);
       newDiv.classList.add('node');
       newDiv.classList.contains('start') ?
-      newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1);
+        newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1);
 
       newDiv.addEventListener('dragstart', (e) => {
         if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
@@ -57,9 +57,12 @@ function createGrid() {
     }
   }
 
+
+  let leftMouseKeyIsDown = false;
   const divs = document.querySelectorAll('.node');
   divs.forEach((node) => {
-    node.addEventListener('click', (e) => {
+    node.addEventListener('mousedown', (e) => {
+      leftMouseKeyIsDown = true;
       if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
         return;
       }
@@ -105,11 +108,11 @@ function getCoords(node) {
   return `${row} ${column}`;
 }
 
-function addHeuristic(nodeList, startNode, finishNode) {
+function addHeuristic(nodeList, finishNode) {
   const finishNodeRow = parseInt(finishNode.getAttribute('row'));
   const finishNodeColumn = parseInt(finishNode.getAttribute('column'));
-  const startNodeRow = parseInt(startNode.getAttribute('row'));
-  const startNodeColumn = parseInt(startNode.getAttribute('column'));
+
+
   nodeList.forEach((node) => {
     const thisNodeRow = parseInt(node.getAttribute('row'));
     const thisNodeColumn = parseInt(node.getAttribute('column'));
@@ -122,14 +125,24 @@ function addHeuristic(nodeList, startNode, finishNode) {
       }
     } else {
       if (finishNodeColumn > thisNodeColumn) {
-      heuristic =  thisNodeRow - finishNodeRow + finishNodeColumn - thisNodeColumn;
+        heuristic = thisNodeRow - finishNodeRow + finishNodeColumn - thisNodeColumn;
       } else {
-        heuristic =  thisNodeRow - finishNodeRow + thisNodeColumn - finishNodeColumn;
+        heuristic = thisNodeRow - finishNodeRow + thisNodeColumn - finishNodeColumn;
       }
     }
-    
+
     node.setAttribute('heuristic', heuristic);
   });
+}
+
+function addWall(e) {
+  if (leftMouseKeyIsDown)
+  {
+    if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
+      return;
+    }
+    e.target.classList.add('blocked');
+  }
 }
 
 (function main() {
@@ -139,9 +152,8 @@ function addHeuristic(nodeList, startNode, finishNode) {
   startNode = document.querySelector('.node.start');
   finishNode = document.querySelector('.node.finish');
 
-
   select.addEventListener('change', (e) => {
-    addHeuristic(nodeList, startNode, finishNode);
+    addHeuristic(nodeList, finishNode);
     algo = e.target.value;
   });
 
@@ -158,7 +170,7 @@ function addHeuristic(nodeList, startNode, finishNode) {
         Dijkstras(graph, startCoords, startCoords);
         break;
       case 'a-star':
-        addHeuristic(nodeList, startNode, finishNode);
+        addHeuristic(nodeList, finishNode);
         AStar(graph, startCoords, startCoords);
     }
   })

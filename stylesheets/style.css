@@ -70,7 +70,7 @@ section.visualizer {
   width: 95%;
   height: 80%;
   align-self: center;
-  grid-template-columns: repeat(50, 1fr);
+  grid-template-columns: repeat(55, 1fr);
   grid-template-rows: repeat(30, 1fr);
 }
 

@@ -4,7 +4,7 @@ let mouseOver;
 
 export function createGrid(section, startNode, finishNode) {
   for (let row = 0; row < 30; row++) {
-    for (let column = 0; column < 50; column++) {
+    for (let column = 0; column < 55; column++) {
       const newDiv = document.createElement('div');
       newDiv.setAttribute('row', row);
       newDiv.setAttribute('column', column);
@@ -36,6 +36,7 @@ export function createGrid(section, startNode, finishNode) {
           e.target.classList.add('finish');
           finishNode = e.target;
         }
+        mouseDown = false;
       });
 
       newDiv.addEventListener('mouseover', (e) => {
@@ -126,4 +127,21 @@ export function addDradSToMainNodes(startNode, finishNode) {
 
   startNode.setAttribute('draggable', true);
   finishNode.setAttribute('draggable', true);
+}
+
+export function clearWalls(section) {
+  for (let node of section.childNodes) {
+    if (node.classList.contains('blocked')) {
+      node.classList.remove('blocked');
+    }
+  }
+}
+
+export function clearPath(section) {
+  for (let node of section.childNodes) {
+    if (node.classList.contains('path') || node.classList.contains('visited')) {
+      node.classList.remove('visited');
+      node.classList.remove('path');
+    }
+  }
 }

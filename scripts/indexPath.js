@@ -2,7 +2,15 @@ import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
 import { createAdjacencyList } from "./createAdjacencyList.js";
 import { depthFirstSearch } from "./algorithms/depthFirstSearch.js";
 import { Dijkstras } from "./algorithms/Dijkstras.js";
-import { addDradSToMainNodes, getCoords, addHeuristic, clearGrid, createGrid } from './gridFunctions.js'
+import {
+  addDradSToMainNodes,
+  getCoords,
+  addHeuristic,
+  clearGrid,
+  clearWalls,
+  clearPath,
+  createGrid,
+} from './gridFunctions.js'
 import { AStar } from "./algorithms/AStar.js";
 
 const section = document.querySelector('.visualizer');
@@ -29,12 +37,22 @@ finishNode = document.querySelector('.node.finish');
 
 (function main() {
   const clearBtn = document.querySelector('button.clear');
+  const clearWallsBtn = document.querySelector('button.clear-walls');
+  const clearPathBtn = document.querySelector('button.clear-path');
   const nodeList = document.querySelectorAll('.node');
 
   select.addEventListener('change', (e) => {
     addHeuristic(nodeList, finishNode);
     algo = e.target.value;
   });
+
+  clearWallsBtn.addEventListener('click', () => {
+    clearWalls(section);
+  })
+
+  clearPathBtn.addEventListener('click', () => {
+    clearPath(section);
+  })
 
   startBtn.addEventListener('click', () => {
     startNode = document.querySelector('.node.start');

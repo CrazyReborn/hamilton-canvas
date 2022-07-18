@@ -7,16 +7,16 @@ export async function breadthFirstSearch(graph, start) {
     const current = queue.shift();
     const row = current.split(' ')[0];
     const column = current.split(' ')[1];
+    const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
 
-    if (document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('visited') ||
-    document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('blocked')) continue;
+    if (node.classList.contains('visited') || node.classList.contains('blocked')) continue;
 
-    if (document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.contains('finish')){
-      break;
-    } 
+    if (node.classList.contains('finish')) break; 
 
     await sleep(1);
-    document.querySelector(`.node[row="${row}"][column="${column}"]`).classList.add('visited');
+    if (!node.classList.contains('start')) {
+      node.classList.add('visited');
+    }
     for (let neighbor of graph[current]) {
       queue.push(neighbor);
     }

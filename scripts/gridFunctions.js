@@ -43,7 +43,6 @@ export function createGrid(section, startNode, finishNode) {
           if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
             return;
           }
-          mouseDown = false;
           e.target.classList.add('blocked');
         }
       })

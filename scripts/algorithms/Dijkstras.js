@@ -31,7 +31,7 @@ export async function Dijkstras(graph, start, parent) {
       break;
     }
 
-    await sleep(11);
+    await sleep(5);
 
 
     node.classList.contains('start')? '' : node.classList.add('visited');

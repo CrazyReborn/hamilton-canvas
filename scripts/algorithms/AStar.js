@@ -1,23 +1,25 @@
 import { sleep } from "../sleep.js";
 
-export async function Dijkstras(graph, start, parent) {
+export async function AStar(graph, start, parent) {
   let parentNode = parent;
+  const startNode = document.querySelector(`.node[row="${start.split(' ')[0]}"][column="${start.split(' ')[1]}"]`);
+  const startHeuristic = getHeuristic(startNode);
   const table = {};
   for (const [node, edges] of Object.entries(graph)) {
     table[node] = {d: Infinity, parent: null};
   };
-  const queue = [ [ start, 0, parentNode] ];
+  const queue = [ [ start, startHeuristic, 0, parentNode] ];
   table[start] = { d: 0, parent: parentNode };
 
   while(queue.length > 0) {
-    queue.sort((a, b) => a[1] - b[1]);      //console.log(table[current]);
+    queue.sort((a, b) => a[1] - b[1]);
     const shifted = queue.shift();
-    const dist = shifted[1];
+    const dist = shifted[2];
     const current = shifted[0];
-    const parentNode = shifted[2];
+    const parentNode = shifted[3];
 
     const row = current.split(' ')[0];
-    const column = current.split(' ')[1]; 
+    const column = current.split(' ')[1];
 
     const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
 
@@ -49,7 +51,8 @@ export async function Dijkstras(graph, start, parent) {
 
       const childNode = document.querySelector(`.node[row="${childRow}"][column="${childColumn}"]`);
       const childWeight = getWeight(childNode);
-      queue.push([neighbor, childWeight + dist, current]);
+      const heuristic = getHeuristic(childNode);
+      queue.push([neighbor, heuristic, childWeight + dist, current]);
     }
   }
 }
@@ -76,4 +79,8 @@ async function createPath(finishNode, startNode, table) {
     const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
     node.classList.add('path');
   }
+}
+
+function getHeuristic(node) {
+  return parseInt(node.getAttribute('heuristic'));
 }

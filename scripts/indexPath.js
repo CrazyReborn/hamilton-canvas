@@ -16,8 +16,8 @@ let dragged;
 let algo = '';
 
 function createGrid() {
-  for (let row = 0; row < 20; row++) {
-    for (let column = 0; column < 23; column++) {
+  for (let row = 0; row < 30; row++) {
+    for (let column = 0; column < 50; column++) {
       const newDiv = document.createElement('div');
       newDiv.setAttribute('row', row);
       newDiv.setAttribute('column', column);
@@ -70,7 +70,7 @@ function createGrid() {
 
 function addStarAndEndNodes() {
   const start = document.querySelector(`.node[row="3"][column="2"]`).classList.add('start');
-  const finish = document.querySelector(`.node[row="10"][column="22"]`).classList.add('finish');
+  const finish = document.querySelector(`.node[row="25"][column="45"]`).classList.add('finish');
 }
 
 function addDradSToMainNodes() {

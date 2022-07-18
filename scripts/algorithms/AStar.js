@@ -75,7 +75,7 @@ async function createPath(finishNode, startNode, table) {
   for (const coord of path) {
     const row = coord.split(' ')[0];
     const column = coord.split(' ')[1];
-    await sleep(33);
+    await sleep(11);
     const node = document.querySelector(`.node[row="${row}"][column="${column}"]`);
     node.classList.add('path');
   }

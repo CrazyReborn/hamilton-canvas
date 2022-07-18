@@ -1,7 +1,8 @@
 import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
 import { createAdjacencyList } from "./createAdjacencyList.js";
-import { depthFirstSearch, showPathDFS } from "./algorithms/depthFirstSearch.js";
+import { depthFirstSearch } from "./algorithms/depthFirstSearch.js";
 import { Dijkstras } from "./algorithms/Dijkstras.js";
+import { addWall, createGrid } from './gridFunctions.js'
 import { AStar } from "./algorithms/AStar.js";
 
 const section = document.querySelector('.visualizer');
@@ -14,62 +15,6 @@ let finishNode = document.querySelector('.node.finish');
 let dragged;
 
 let algo = '';
-
-function createGrid() {
-  for (let row = 0; row < 30; row++) {
-    for (let column = 0; column < 50; column++) {
-      const newDiv = document.createElement('div');
-      newDiv.setAttribute('row', row);
-      newDiv.setAttribute('column', column);
-      newDiv.classList.add('node');
-      newDiv.classList.contains('start') ?
-        newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1);
-
-      newDiv.addEventListener('dragstart', (e) => {
-        if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
-          dragged = e.target;
-        }
-      });
-
-      newDiv.addEventListener('dragover', (e) => {
-        e.preventDefault();
-      }, false);
-
-      newDiv.addEventListener('drop', (e) => {
-        if (dragged.classList.contains('start')) {
-          dragged.classList.remove('start');
-          e.target.classList.add('start');
-          startNode = e.target;
-        }
-
-        if (dragged.classList.contains('finish')) {
-          dragged.classList.remove('finish');
-          e.target.classList.add('finish');
-          finishNode = e.target;
-        }
-
-      });
-
-      newDiv.addEventListener('dragend', (e) => {
-        addDradSToMainNodes();
-      })
-      section.appendChild(newDiv);
-    }
-  }
-
-
-  let leftMouseKeyIsDown = false;
-  const divs = document.querySelectorAll('.node');
-  divs.forEach((node) => {
-    node.addEventListener('mousedown', (e) => {
-      leftMouseKeyIsDown = true;
-      if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
-        return;
-      }
-      e.target.classList.add('blocked');
-    })
-  })
-}
 
 function addStarAndEndNodes() {
   const start = document.querySelector(`.node[row="3"][column="2"]`).classList.add('start');
@@ -84,22 +29,11 @@ function addDradSToMainNodes() {
   finishNode.setAttribute('draggable', true);
 }
 
-createGrid();
+createGrid(section);
 addStarAndEndNodes();
 addDradSToMainNodes();
 
 let graph = createAdjacencyList(document.querySelectorAll('.node'));
-
-function clearGrid() {
-  for (let node of section.childNodes) {
-    if (node.classList.contains('visited')
-      || node.classList.contains('blocked')) {
-      node.classList.remove('visited');
-      node.classList.remove('blocked');
-      node.classList.remove('path');
-    }
-  }
-}
 
 function getCoords(node) {
   const row = parseInt(node.getAttribute('row'));
@@ -135,16 +69,6 @@ function addHeuristic(nodeList, finishNode) {
   });
 }
 
-function addWall(e) {
-  if (leftMouseKeyIsDown)
-  {
-    if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
-      return;
-    }
-    e.target.classList.add('blocked');
-  }
-}
-
 (function main() {
   const clearBtn = document.querySelector('button.clear');
   const nodeList = document.querySelectorAll('.node');
@@ -176,6 +100,6 @@ function addWall(e) {
   })
 
   clearBtn.addEventListener('click', () => {
-    clearGrid();
+    clearGrid(section);
   })
 })()

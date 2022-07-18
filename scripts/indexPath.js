@@ -46,9 +46,9 @@ finishNode = document.querySelector('.node.finish');
       case 'depth-first':
         depthFirstSearch(graph, startCoords);
         break;
-      case 'breadth-first':
-        breadthFirstSearch(graph, startCoords);
-        break;
+      // case 'breadth-first':
+      //   breadthFirstSearch(graph, startCoords);
+      //   break;
       case 'dijkstra':
         Dijkstras(graph, startCoords, startCoords);
         break;

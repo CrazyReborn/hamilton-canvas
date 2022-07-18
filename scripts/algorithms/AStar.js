@@ -52,7 +52,7 @@ export async function AStar(graph, start, parent) {
       const childNode = document.querySelector(`.node[row="${childRow}"][column="${childColumn}"]`);
       const childWeight = getWeight(childNode);
       const heuristic = getHeuristic(childNode);
-      queue.push([neighbor, heuristic, childWeight + dist, current]);
+      queue.push([neighbor, heuristic + childWeight, childWeight + dist, current]);
     }
   }
 }

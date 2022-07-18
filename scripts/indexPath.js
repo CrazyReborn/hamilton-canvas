@@ -8,6 +8,11 @@ const section = document.querySelector('.visualizer');
 const select = document.querySelector('select');
 const startBtn = document.querySelector('button.start');
 
+let startNode = document.querySelector('.node.start');
+let finishNode = document.querySelector('.node.finish');
+
+let dragged;
+
 let algo = '';
 
 function createGrid() {
@@ -16,32 +21,76 @@ function createGrid() {
       const newDiv = document.createElement('div');
       newDiv.setAttribute('row', row);
       newDiv.setAttribute('column', column);
-      
       newDiv.classList.add('node');
-      if (row == 3 && column == 2) newDiv.classList.add('start');
-      if (row == 10 && column == 22) newDiv.classList.add('finish');
       newDiv.classList.contains('start') ?
-      newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1)
-      
+      newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1);
+
+      newDiv.addEventListener('dragstart', (e) => {
+        if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
+          dragged = e.target;
+        }
+      });
+
+      newDiv.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      }, false);
+
+      newDiv.addEventListener('drop', (e) => {
+        if (dragged.classList.contains('start')) {
+          dragged.classList.remove('start');
+          e.target.classList.add('start');
+          startNode = e.target;
+        }
+
+        if (dragged.classList.contains('finish')) {
+          dragged.classList.remove('finish');
+          e.target.classList.add('finish');
+          finishNode = e.target;
+        }
+
+      });
+
+      newDiv.addEventListener('dragend', (e) => {
+        addDradSToMainNodes();
+      })
       section.appendChild(newDiv);
     }
   }
+
   const divs = document.querySelectorAll('.node');
   divs.forEach((node) => {
     node.addEventListener('click', (e) => {
+      if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
+        return;
+      }
       e.target.classList.add('blocked');
     })
   })
 }
 
+function addStarAndEndNodes() {
+  const start = document.querySelector(`.node[row="3"][column="2"]`).classList.add('start');
+  const finish = document.querySelector(`.node[row="10"][column="22"]`).classList.add('finish');
+}
+
+function addDradSToMainNodes() {
+  let startNode = document.querySelector('.node.start');
+  let finishNode = document.querySelector('.node.finish');
+
+  startNode.setAttribute('draggable', true);
+  finishNode.setAttribute('draggable', true);
+}
+
 createGrid();
+addStarAndEndNodes();
+addDradSToMainNodes();
 
 let graph = createAdjacencyList(document.querySelectorAll('.node'));
 
 function clearGrid() {
   for (let node of section.childNodes) {
     if (node.classList.contains('visited')
-        || node.classList.contains('blocked')) {
+      || node.classList.contains('blocked')) {
       node.classList.remove('visited');
       node.classList.remove('blocked');
       node.classList.remove('path');
@@ -53,14 +102,13 @@ function getCoords(node) {
   const row = parseInt(node.getAttribute('row'));
   const column = parseInt(node.getAttribute('column'));
   const coords = `${row} ${column}`;
-  console.log(coords);
   return `${row} ${column}`;
 }
 
 function addHeuristic(nodeList, finishNode) {
   const finishNodeRow = parseInt(finishNode.getAttribute('row'));
   const finishNodeColumn = parseInt(finishNode.getAttribute('column'));
-  nodeList.forEach((node) =>{
+  nodeList.forEach((node) => {
     const thisNodeRow = parseInt(node.getAttribute('row'));
     const thisNodeColumn = parseInt(node.getAttribute('column'));
 
@@ -71,11 +119,11 @@ function addHeuristic(nodeList, finishNode) {
 
 (function main() {
   const clearBtn = document.querySelector('button.clear');
-  const startNode = document.querySelector('.node.start');
-  const finishNode = document.querySelector('.node.finish');
   const nodeList = document.querySelectorAll('.node');
 
-  
+  startNode = document.querySelector('.node.start');
+  finishNode = document.querySelector('.node.finish');
+
 
   select.addEventListener('change', (e) => {
     addHeuristic(nodeList, finishNode);
@@ -84,7 +132,7 @@ function addHeuristic(nodeList, finishNode) {
 
   startBtn.addEventListener('click', () => {
     const startCoords = getCoords(startNode);
-    switch(algo) {
+    switch (algo) {
       case 'depth-first':
         depthFirstSearch(graph, startCoords);
         break;
@@ -99,7 +147,7 @@ function addHeuristic(nodeList, finishNode) {
     }
   })
 
-  clearBtn.addEventListener('click', () =>{
+  clearBtn.addEventListener('click', () => {
     clearGrid();
   })
 })()

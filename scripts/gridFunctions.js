@@ -1,4 +1,6 @@
 let dragged;
+let mouseDown;
+let mouseOver;
 
 export function createGrid(section, startNode, finishNode) {
   for (let row = 0; row < 30; row++) {
@@ -8,7 +10,7 @@ export function createGrid(section, startNode, finishNode) {
       newDiv.setAttribute('column', column);
       newDiv.classList.add('node');
       newDiv.classList.contains('start') ?
-        newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1);
+      newDiv.setAttribute('weight', 0) : newDiv.setAttribute('weight', 1);
 
       newDiv.addEventListener('dragstart', (e) => {
         if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
@@ -34,8 +36,25 @@ export function createGrid(section, startNode, finishNode) {
           e.target.classList.add('finish');
           finishNode = e.target;
         }
-
       });
+
+      newDiv.addEventListener('mouseover', (e) => {
+        if (mouseDown) {
+          if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
+            return;
+          }
+          mouseDown = false;
+          e.target.classList.add('blocked');
+        }
+      })
+
+      newDiv.addEventListener('mousedown', () => {
+        mouseDown = true;
+      })
+
+      newDiv.addEventListener('mouseup', () => {
+        mouseDown = false;
+      })
 
       newDiv.addEventListener('dragend', (e) => {
         addDradSToMainNodes();

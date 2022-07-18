@@ -2,7 +2,7 @@ import { breadthFirstSearch } from "./algorithms/breadthFirstSearch.js";
 import { createAdjacencyList } from "./createAdjacencyList.js";
 import { depthFirstSearch } from "./algorithms/depthFirstSearch.js";
 import { Dijkstras } from "./algorithms/Dijkstras.js";
-import { addDradSToMainNodes, getCoords, addHeuristic, createGrid } from './gridFunctions.js'
+import { addDradSToMainNodes, getCoords, addHeuristic, clearGrid, createGrid } from './gridFunctions.js'
 import { AStar } from "./algorithms/AStar.js";
 
 const section = document.querySelector('.visualizer');
@@ -18,8 +18,6 @@ function addStarAndEndNodes() {
   const start = document.querySelector(`.node[row="3"][column="2"]`).classList.add('start');
   const finish = document.querySelector(`.node[row="25"][column="45"]`).classList.add('finish');
 }
-
-
 
 createGrid(section, startNode, finishNode);
 addStarAndEndNodes();

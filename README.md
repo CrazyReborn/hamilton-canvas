@@ -1,6 +1,7 @@
 # hamilton-canvas
 #### An algorithm visualizer written with vanilla JavaScript. Canvas API is used to visualize sorting algorithms. Pathfing is performed on a nodeList of divs.
 
+![animation](https://imgur.com/MdRtv6Y)
 
 ## Sorting algorithms
 

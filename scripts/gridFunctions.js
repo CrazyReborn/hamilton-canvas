@@ -1,6 +1,13 @@
 let dragged;
 let mouseDown;
 let mouseOver;
+let checkbox;
+const togleSwitch = document.querySelector('.switch-checkbox');
+togleSwitch.addEventListener('change', () => {
+  checkbox = togleSwitch.checked;
+})
+
+
 
 export function createGrid(section, startNode, finishNode) {
   for (let row = 0; row < 30; row++) {
@@ -44,7 +51,12 @@ export function createGrid(section, startNode, finishNode) {
           if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
             return;
           }
-          e.target.classList.add('blocked');
+          if (!checkbox) {
+            e.target.classList.add('blocked');
+          } else {
+            e.target.classList.add('weighted');
+            e.target.setAttribute('weight', 5);
+          }
         }
       })
 
@@ -76,6 +88,7 @@ export function clearGrid(section) {
       node.classList.remove('visited');
       node.classList.remove('blocked');
       node.classList.remove('path');
+      node.classList.remove('weighted');
     }
   }
 }
@@ -84,7 +97,13 @@ export function addWall(e) {
   if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
     return;
   }
-  e.target.classList.add('blocked');
+  if (!checkbox) {
+    e.target.classList.add('blocked');
+  } else {
+    e.target.classList.add('weighted');
+    e.target.setAttribute('weight', 5);
+  }
+  
 }
 
 export function addHeuristic(nodeList, finishNode) {
@@ -131,8 +150,10 @@ export function addDradSToMainNodes(startNode, finishNode) {
 
 export function clearWalls(section) {
   for (let node of section.childNodes) {
-    if (node.classList.contains('blocked')) {
+    if (node.classList.contains('blocked') ||
+        node.classList.contains('weighted')) {
       node.classList.remove('blocked');
+      node.classList.remove('weighted');
     }
   }
 }

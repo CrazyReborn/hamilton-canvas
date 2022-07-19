@@ -127,6 +127,10 @@ section.visualizer {
   height: 0;
 }
 
+.weighted {
+  background-color: #fff2b7;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;

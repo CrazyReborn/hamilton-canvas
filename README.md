@@ -1,6 +1,7 @@
 # hamilton-canvas
 #### An algorithm visualizer written with vanilla JavaScript. Canvas API is used to visualize sorting algorithms. Pathfing is performed on a nodeList of divs.
 
+
 ## Sorting algorithms
 
 **Selection sort** finds the smallest element in the unsorted subarray and moves it to the beginning of that subarray.
@@ -15,3 +16,9 @@
 
 
 ## Pathfinding algorithms
+
+**Depth first search** Algorithm starts at the root node and explores the graph as far as possible along a branch. If there is no more nodes in this brach - backtrack when there will be one availiable. Uses stack as the main data structure.
+
+**Dijkstra's algorithm** Is basically a modified breadth first search algorithm, that is performed on a weighted graph. Main data structure is queue. On at the beginning of the algorithm every node is assigned a distance of infinity, starting node is assigned 0. The algorithm starts from the node with the smallest distance (root) and explores its neighbors, while changing their distance, if it is smaller that the previous. The distance is calculated by adding distance to the current node to weight of the neighbor node. This algorithm finds shortest path to the target node.
+
+**A\*(star) algorithm** Modifired Dijkstra's, that requires the distance from target node (heuristic) to any other node to be known. Using heuristic the algorithm explores neighbors with the smallest one, thus always moving in the general direction of target node.

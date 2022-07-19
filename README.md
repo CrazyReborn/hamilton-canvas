@@ -1,6 +1,18 @@
 # hamilton-canvas
 #### An algorithm visualizer written with vanilla JavaScript. Canvas API is used to visualize sorting algorithms. Pathfing is performed on a nodeList of divs.
 
+*Please use desktop version of Chrome browser, the app is not mobile friendly*
+
+
+## How to use
+
+**Pathfinding part**
+On the top bar you can see control elements. Those are self explanatory. Below there is a toggle switch that controls what is placed on clicking the grid: grey color shows, that walls will be placed, blue color show, that weight will be added to a node. Adding a wall to a weighted node will not work. You can drag and drop staring (green) and target (gold) nodes. Select an algorithm to be performed on the graph and enjoy the show!
+
+**Sorting part**
+On the top bar you can see control elements. Create an array using range slider, choose the algorithm to be performed on the array and enjoy the show!
+
+
 ## Sorting algorithms
 
 **Selection sort** finds the smallest element in the unsorted subarray and moves it to the beginning of that subarray.
@@ -25,6 +37,8 @@
 
 ## How it works
 
-**Sorting part** Upon visiting the page or moving the range slider an array is generated, with *N* number of elements, where *N* is value of the range slider. After that the array is passed to a canvas function, that visualizes the array as a chart with bars of different height. The height of a bar is determined by the value of the corresponding array element. After selecting the algorithm to be performed on the array, the array is passed to the sorting function. After each operation the canvas function is called to visualize changes to the array.
+**Sorting part**
+Upon visiting the page or moving the range slider an array is generated, with *N* number of elements, where *N* is value of the range slider. After that the array is passed to a canvas function, that visualizes the array as a chart with bars of different height. The height of a bar is determined by the value of the corresponding array element. After selecting the algorithm to be performed on the array, the array is passed to the sorting function. After each operation the canvas function is called to visualize changes to the array.
 
-**Pathfinding part** The page generates 30x55 grid of divs while assinging *row* and *column* attributes. Next the nodeList of the divs is passed to the funciton that creates an adjacency list from this nodeList, using *row* and *column* properties as representation of the nodes. After selecting an algorithm the adjacency list and start and/or end nodes are passed to the selected algorithm function. Functions generally behave like that: take a node from stack or queue, find a div with corresponding *row* and *column* attributes, check if it has been visited or is a blocked/target node. If it this node has not been visited yet, mark it as visited by adding class 'visited', if it is the target - stop the pathfinding, if it is a wall (node is blocked) - skip it. After that neighbors of the node are added to the stack/queue and the algorithm continues on the remanaing members of the data structure before the target is found. If target is not found - return false.
+**Pathfinding part**
+The page generates 30x55 grid of divs while assinging *row* and *column* attributes. Next the nodeList of the divs is passed to the funciton that creates an adjacency list from this nodeList, using *row* and *column* properties as representation of the nodes. After selecting an algorithm the adjacency list and start and/or end nodes are passed to the selected algorithm function. Functions generally behave like that: take a node from stack or queue, find a div with corresponding *row* and *column* attributes, check if it has been visited or is a blocked/target node. If it this node has not been visited yet, mark it as visited by adding class 'visited', if it is the target - stop the pathfinding, if it is a wall (node is blocked) - skip it. After that neighbors of the node are added to the stack/queue and the algorithm continues on the remanaing members of the data structure before the target is found. If target is not found - return false.

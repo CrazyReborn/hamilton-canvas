@@ -52,6 +52,9 @@ export function createGrid(section, startNode, finishNode) {
             return;
           }
           if (!checkbox) {
+            if (e.target.classList.contains('weighted')) {
+              return;
+            }
             e.target.classList.add('blocked');
           } else {
             e.target.classList.add('weighted');
@@ -98,7 +101,9 @@ export function addWall(e) {
     return;
   }
   if (!checkbox) {
-    e.target.classList.add('blocked');
+    if (e.target.classList.contains('weighted')) {
+      return;
+    }
   } else {
     e.target.classList.add('weighted');
     e.target.setAttribute('weight', 5);

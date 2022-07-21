@@ -2,6 +2,7 @@
 An algorithm visualizer written with vanilla JavaScript. Canvas API is used to visualize sorting algorithms. Pathfing is performed on a nodeList of divs.
 
 *Please use desktop version of Chrome browser, the app is not mobile friendly*
+[Live page](https://crazyreborn.github.io/hamilton-canvas/)
 
 
 ## How to use

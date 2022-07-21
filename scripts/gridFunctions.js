@@ -80,7 +80,20 @@ export function createGrid(section, startNode, finishNode) {
 
   const divs = document.querySelectorAll('.node');
   divs.forEach((node) => {
-    node.addEventListener('click', addWall, false);
+    node.addEventListener('click', (e) => {
+      if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
+        return;
+      }
+      if (!checkbox) {
+        if (e.target.classList.contains('weighted')) {
+          return;
+        }
+        e.target.classList.add('blocked');
+      } else {
+        e.target.classList.add('weighted');
+        e.target.setAttribute('weight', 5);
+      }
+    }, false);
   });
 }
 
@@ -94,21 +107,6 @@ export function clearGrid(section) {
       node.classList.remove('weighted');
     }
   }
-}
-
-export function addWall(e) {
-  if (e.target.classList.contains('start') || e.target.classList.contains('finish')) {
-    return;
-  }
-  if (!checkbox) {
-    if (e.target.classList.contains('weighted')) {
-      return;
-    }
-  } else {
-    e.target.classList.add('weighted');
-    e.target.setAttribute('weight', 5);
-  }
-  
 }
 
 export function addHeuristic(nodeList, finishNode) {
@@ -155,19 +153,29 @@ export function addDradSToMainNodes(startNode, finishNode) {
 
 export function clearWalls(section) {
   for (let node of section.childNodes) {
-    if (node.classList.contains('blocked') ||
-        node.classList.contains('weighted')) {
+    if (node.classList.contains('blocked')) {
       node.classList.remove('blocked');
-      node.classList.remove('weighted');
     }
   }
 }
 
 export function clearPath(section) {
   for (let node of section.childNodes) {
-    if (node.classList.contains('path') || node.classList.contains('visited')) {
+    if (node.classList.contains('path') ||
+        node.classList.contains('visited') ||
+        node.classList.contains('weighted')) {
       node.classList.remove('visited');
       node.classList.remove('path');
+      node.classList.remove('weighted');
     }
   }
+}
+
+export function colorInPink(section) {
+  const nodes = section.childNodes;
+  nodes.forEach((node) => {
+    if (node.classList.contains('visited')) {
+      node.classList.add('no-path');
+    }
+  })
 }

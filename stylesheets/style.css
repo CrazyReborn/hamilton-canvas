@@ -97,6 +97,11 @@ section.visualizer {
   background-color: #73f4fd;
 }
 
+.node.visited.no-path {
+  animation: noPathAnimation 0.5s ease;
+  background-color: pink;
+}
+
 .node.visited.path {
   animation: pathAnimation 0.5s ease;
   background-color: rgb(255, 255, 136);
@@ -186,6 +191,15 @@ input:checked + .slider:before {
   }
   100% {
     background-color: rgb(255, 255, 136)
+  }
+}
+
+@keyframes noPathAnimation {
+  0% {
+    background-color: #73f4fd;
+  }
+  100% {
+    background-color: pink;
   }
 }
 

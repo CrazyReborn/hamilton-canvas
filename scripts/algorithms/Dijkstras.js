@@ -28,7 +28,7 @@ export async function Dijkstras(graph, start, parent) {
         table[current] = { d: dist, parent: parentNode };
       }
       createPath(current, start, table);
-      break;
+      return true;
     }
 
     await sleep(5);
@@ -52,6 +52,7 @@ export async function Dijkstras(graph, start, parent) {
       queue.push([neighbor, childWeight + dist, current]);
     }
   }
+  return false;
 }
 
 function getWeight(node) {

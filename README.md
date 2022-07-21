@@ -7,9 +7,11 @@ An algorithm visualizer written with vanilla JavaScript. Canvas API is used to v
 ## How to use
 
 **Pathfinding part**
+
 On the top bar you can see control elements. Those are self explanatory. Below there is a toggle switch that controls what is placed on clicking the grid: grey color shows, that walls will be placed, blue color show, that weight will be added to a node. Adding a wall to a weighted node will not work. You can drag and drop staring (green) and target (gold) nodes. Select an algorithm to be performed on the graph and enjoy the show!
 
 **Sorting part**
+
 On the top bar you can see control elements. Create an array using range slider, choose the algorithm to be performed on the array and enjoy the show!
 
 

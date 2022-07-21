@@ -10,6 +10,7 @@ import {
   clearWalls,
   clearPath,
   createGrid,
+  colorInPink,
 } from './gridFunctions.js'
 import { AStar } from "./algorithms/AStar.js";
 
@@ -54,24 +55,28 @@ finishNode = document.querySelector('.node.finish');
     clearPath(section);
   })
 
-  startBtn.addEventListener('click', () => {
+  startBtn.addEventListener('click', async () => {
     startNode = document.querySelector('.node.start');
     finishNode = document.querySelector('.node.finish');
     let startCoords = getCoords(startNode);
+    let result = false;
     switch (algo) {
       case 'depth-first':
-        depthFirstSearch(graph, startCoords);
+         result = await depthFirstSearch(graph, startCoords);
         break;
       // case 'breadth-first':
       //   breadthFirstSearch(graph, startCoords);
       //   break;
       case 'dijkstra':
-        Dijkstras(graph, startCoords, startCoords);
+        result = await Dijkstras(graph, startCoords, startCoords);
         break;
       case 'a-star':
         addHeuristic(nodeList, finishNode);
-        AStar(graph, startCoords, startCoords);
+        result = await AStar(graph, startCoords, startCoords);
+        
+        break;
     }
+    if (!result) colorInPink(section);
   })
 
   clearBtn.addEventListener('click', () => {

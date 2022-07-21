@@ -31,7 +31,7 @@ export async function AStar(graph, start, parent) {
         table[current] = { d: dist, parent: parentNode };
       }
       createPath(current, start, table);
-      break;
+      return true;
     }
 
     await sleep(11);
@@ -56,6 +56,8 @@ export async function AStar(graph, start, parent) {
       queue.push([neighbor, heuristic + childWeight, childWeight + dist, current]);
     }
   }
+
+  return false;
 }
 
 function getWeight(node) {

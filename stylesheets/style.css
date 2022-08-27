@@ -47,12 +47,14 @@ button {
   background-color: #161e8f;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 button.start {
   background-color: #1e724b;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 nav > a {
